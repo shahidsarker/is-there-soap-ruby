@@ -3,7 +3,7 @@ class CreateAreaItems < ActiveRecord::Migration[5.2]
     create_table :area_items do |t|
       t.references :area, foreign_key: true
       t.references :item, foreign_key: true
-      t.decimal(3,2) :status
+      t.decimal :status, precision: 3, scale: 2
 
       t.timestamps
     end
