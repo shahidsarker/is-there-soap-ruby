@@ -7,26 +7,24 @@ class SpacesController < ApplicationController
     @spaces = Space.all
   end
 
-  def show;
-  end
+  def show; end
 
   def new
     @space = Space.new
   end
 
-  def edit;
-  end
+  def edit; end
 
   def create
     @space = Space.new(space_params)
 
     respond_to do |f|
       if @space.save
-        f.html {redirect_to @space, notice: 'Space created!'}
-        f.json {render :show, status: :created, location: @space}
+        f.html { redirect_to @space, notice: 'Space created!' }
+        f.json { render :show, status: :created, location: @space }
       else
-        f.html {render :new}
-        f.json {render json: @space.errors, status: :unprocessable_entity}
+        f.html { render :new }
+        f.json { render json: @space.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -34,11 +32,11 @@ class SpacesController < ApplicationController
   def update
     respond_to do |f|
       if @space.update(space_params)
-        f.html {redirect_to @space, notice: 'Space updated!'}
-        f.json {render :show, status: :ok, location: @space}
+        f.html { redirect_to @space, notice: 'Space updated!' }
+        f.json { render :show, status: :ok, location: @space }
       else
-        f.html {render :edit}
-        f.json {render json: @space.errors, status: :unprocessable_entity}
+        f.html { render :edit }
+        f.json { render json: @space.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,8 +44,8 @@ class SpacesController < ApplicationController
   def destroy
     @space.destroy
     respond_to do |f|
-      f.html {redirect_to spaces_url, notice: 'Space destroyed.'}
-      f.json {head :no_content}
+      f.html { redirect_to spaces_url, notice: 'Space destroyed.' }
+      f.json { head :no_content }
     end
   end
 
@@ -59,8 +57,6 @@ class SpacesController < ApplicationController
 
   def space_params
     # add the fields in here!
-    params.require(:space).permit()
+    params.require(:space).permit(:name, :description, :location)
   end
-
-
 end
