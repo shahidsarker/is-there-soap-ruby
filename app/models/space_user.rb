@@ -1,0 +1,2 @@
+class SpaceUser < ApplicationRecord
+end

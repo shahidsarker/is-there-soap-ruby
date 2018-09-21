@@ -1,0 +1,2 @@
+class SpaceUsersController < ApplicationController
+end

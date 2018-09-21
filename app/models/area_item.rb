@@ -1,0 +1,2 @@
+class AreaItem < ApplicationRecord
+end
