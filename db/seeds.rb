@@ -12,20 +12,24 @@ require 'faker'
 ADMIN_EMAIL = ENV['SOAP_ADMIN_EMAIL']
 ADMIN_PASSWORD = ENV['SOAP_ADMIN_PASSWORD']
 
-User.create(email: ADMIN_EMAIL,
-            password: ADMIN_PASSWORD,
-            name: 'Shahid',
-            admin: true)
+users = []
+admin = User.create(email: ADMIN_EMAIL,
+                    password: ADMIN_PASSWORD,
+                    name: 'Shahid',
+                    admin: true)
 
-User.create(email: 'example@example.com',
-            password: 'password',
-            name: Faker::Zelda.character,
-            admin: false)
+users.push(admin)
+userOne = User.create(email: 'example@example.com',
+                      password: 'password',
+                      name: Faker::Zelda.character,
+                      admin: false)
+users.push(userOne)
 
-User.create(email: 'test@test.com',
-            password: 'password',
-            name: Faker::Zelda.character,
-            admin: false)
+userTwo = User.create(email: 'test@test.com',
+                      password: 'password',
+                      name: Faker::Zelda.character,
+                      admin: false)
+users.push(userTwo)
 
 spaces = []
 2.times do
@@ -33,6 +37,11 @@ spaces = []
                        description: Faker::Lorem.sentences(1),
                        location: Faker::Address.community)
   spaces.push(space)
+end
+
+4.times do
+  SpaceUser.create(space: spaces.sample,
+                   user: users.sample)
 end
 
 areas = []
@@ -46,8 +55,16 @@ end
 
 items = []
 4.times do
-  item = Item.create(name:Faker::Zelda.item,
+  item = Item.create(name: Faker::Zelda.item,
                      description: Faker::Lorem.sentences(1),
+                     quantity: rand(1..10),
+                     unit: Faker::Measurement.height("all"),
+  )
+  items.push(item)
+end
 
-                     )
+4.times do
+  AreaItem.create(area:areas.sample,
+                  item:items.sample,
+                  status:1)
 end
