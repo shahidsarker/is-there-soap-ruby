@@ -1,4 +1,7 @@
 <% @spaces.each do |space| %>
-<%= pp space.name %>
-  <% pp space %>
+Space Name: <%= space.name %>
+  Location: <%= space.location %>
+  Description: <%= space.description %>
+
+  <%= space.areas.length %> Areas
 <% end %>
