@@ -68,3 +68,6 @@ gem 'sprockets-rails', '>= 2.3.2'
 gem 'jquery-rails'
 
 gem 'faker'
+
+gem 'octicons'
+gem 'octicons_helper'
