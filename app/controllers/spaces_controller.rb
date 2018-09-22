@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SpacesController < ApplicationController
-  # before_action :set_space, only: [:show]
+  before_action :set_space, only: [:show,:edit, :update, :destroy]
 
   def index
     @spaces = Space.all
@@ -18,34 +18,34 @@ class SpacesController < ApplicationController
   def create
     @space = Space.new(space_params)
 
-    respond_to do |f|
+    respond_to do |format|
       if @space.save
-        f.html { redirect_to @space, notice: 'Space created!' }
-        f.json { render :show, status: :created, location: @space }
+        format.html { redirect_to @space, notice: 'Space created!' }
+        format.json { render :show, status: :created, location: @space }
       else
-        f.html { render :new }
-        f.json { render json: @space.errors, status: :unprocessable_entity }
+        format.html { render :new }
+        format.json { render json: @space.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
-    respond_to do |f|
+    respond_to do |format|
       if @space.update(space_params)
-        f.html { redirect_to @space, notice: 'Space updated!' }
-        f.json { render :show, status: :ok, location: @space }
+        format.html { redirect_to @space, notice: 'Space updated!' }
+        format.json { render :show, status: :ok, location: @space }
       else
-        f.html { render :edit }
-        f.json { render json: @space.errors, status: :unprocessable_entity }
+        format.html { render :edit }
+        format.json { render json: @space.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
     @space.destroy
-    respond_to do |f|
-      f.html { redirect_to spaces_url, notice: 'Space destroyed.' }
-      f.json { head :no_content }
+    respond_to do |format|
+      format.html { redirect_to spaces_url, notice: 'Space destroyed.' }
+      format.json { head :no_content }
     end
   end
 
@@ -57,6 +57,6 @@ class SpacesController < ApplicationController
 
   def space_params
     # add the fields in here!
-    params.require(:space).permit(:name, :description, :location)
+    params.require(:space).permit(:name, :description, :location, :image)
   end
 end

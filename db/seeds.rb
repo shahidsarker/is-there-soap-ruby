@@ -13,31 +13,35 @@ ADMIN_EMAIL = ENV['SOAP_ADMIN_EMAIL']
 ADMIN_PASSWORD = ENV['SOAP_ADMIN_PASSWORD']
 
 users = []
-admin = User.create(email: ADMIN_EMAIL,
-                    password: ADMIN_PASSWORD,
+admin = User.create(email: "#{ADMIN_EMAIL}",
+                    password: "#{ADMIN_PASSWORD}",
                     name: 'Shahid',
                     admin: true)
-
+pp admin
 users.push(admin)
 userOne = User.create(email: 'example@example.com',
                       password: 'password',
                       name: Faker::Zelda.character,
                       admin: false)
+pp userOne
 users.push(userOne)
 
 userTwo = User.create(email: 'test@test.com',
                       password: 'password',
                       name: Faker::Zelda.character,
                       admin: false)
+pp userTwo
 users.push(userTwo)
 
 spaces = []
 2.times do
   space = Space.create(name: Faker::Lorem.word,
-                       description: Faker::Lorem.sentences(1),
+                       description: Faker::Lorem.sentences(1)[0],
                        location: Faker::Address.community)
   spaces.push(space)
 end
+
+pp spaces
 
 4.times do
   SpaceUser.create(space: spaces.sample,
@@ -47,24 +51,28 @@ end
 areas = []
 3.times do
   area = Area.create(name: Faker::Lorem.word,
-                     description: Faker::Lorem.sentences(1),
+                     description: Faker::Lorem.sentences(1)[0],
                      space: spaces.sample
   )
   areas.push(area)
 end
 
+pp areas
+
 items = []
 4.times do
   item = Item.create(name: Faker::Zelda.item,
-                     description: Faker::Lorem.sentences(1),
+                     description: Faker::Lorem.sentences(1)[0],
                      quantity: rand(1..10),
                      unit: Faker::Measurement.height("all"),
   )
   items.push(item)
 end
 
+pp items
+
 4.times do
-  AreaItem.create(area:areas.sample,
-                  item:items.sample,
-                  status:1)
+  AreaItem.create(area: areas.sample,
+                  item: items.sample,
+                  status: 1)
 end
