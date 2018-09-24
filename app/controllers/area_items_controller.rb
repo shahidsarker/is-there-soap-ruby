@@ -1,5 +1,5 @@
 class AreaItemsController < ApplicationController
-  before_action :set_area_item, only: [:show, :edit, :update, :destroy, :full]
+  before_action :set_area_item, only: [:show, :edit, :update, :destroy, :full, :half, :empty]
 
   def index
     @area_items = AreaItem.all
