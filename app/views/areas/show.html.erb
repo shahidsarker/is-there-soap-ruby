@@ -1,0 +1,27 @@
+<!--card wih space information-->
+<div class="card col-6">
+
+  <% if @area.image.attached? %>
+    <%= image_tag(@area.image, class: 'card-img-top') %>
+  <% else %>
+    <%= octicon 'note',:height => 200,  :class => "card-img-top" %>
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= @area.name %></h5>
+    <p class="card-text"><%= @area.description %></p>
+    <a href="#" class="btn btn-primary">Add Area</a>
+  </div>
+</div>
+<!--links to areas -->
+<% @area.area_items.each do |areaitem| %>
+  <div class="card col-6">
+    Item: <%= areaitem.item.name %>
+    <%= link_to areaitem.item.name, areaitem.item %>
+
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: <%= areaitem.status * 100 %>%" aria-valuenow="<%= areaitem.status * 100 %>" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </div>
+<% end %>
+
+<p>This area is used by <%= @area.space.users.count %>.</p>

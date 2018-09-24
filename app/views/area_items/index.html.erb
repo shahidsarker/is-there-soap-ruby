@@ -1,0 +1,21 @@
+<div class="row">
+
+  <% @area_items.each do |areaitem| %>
+    <div class="card col-8">
+      <%# if area.image.attached? %>
+        <%#= image_tag(area.image, class: 'card-img-top') %>
+      <%# else %>
+        <%#= octicon 'note', :height => 120, :class => 'card-img-top' %>
+      <%# end %>
+      Area Name: <%= link_to areaitem.area.name, areaitem.area %>
+      Space: <%= areaitem.area.space.name %>
+      Description: <%= areaitem.item.description %>
+<!--      <%#= area.items.length %> items-->
+
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: <%= areaitem.status * 100 %>%" aria-valuenow="<%= areaitem.status * 100 %>" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+  <% end %>
+
+</div>

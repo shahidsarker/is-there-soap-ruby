@@ -1,17 +1,23 @@
 <!--card wih space information-->
 <div class="card" style="width: 18rem;">
 
+  <% if @space.image.attached? %>
   <%= image_tag(@space.image, class: 'card-img-top') %>
-
-<!--  <img class="card-img-top" src="<%#= space_ %>" alt="Card image cap">-->
+  <% else %>
+    <%= octicon "location",:height => 200,  :class => "card-img-top" %>
+  <% end %>
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title"><%= @space.name %></h5>
+    <p class="card-text"><%= @space.description %></p>
+    <a href="#" class="btn btn-primary">Add Area</a>
   </div>
 </div>
-
-
-
-
 <!--links to areas -->
+<% @space.areas.each do |area| %>
+  <div class="card">
+  Area: <%= area.name %>
+  Items: <%= area.items.count %>
+  </div>
+<% end %>
+
+<p>This space has <%= @space.users.count %> users.</p>

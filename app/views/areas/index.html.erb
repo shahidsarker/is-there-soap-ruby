@@ -1,0 +1,17 @@
+<div class="row">
+
+  <% @areas.each do |area| %>
+    <div class="card col-8">
+      <% if area.image.attached? %>
+        <%= image_tag(area.image, class: 'card-img-top') %>
+      <% else %>
+        <%= octicon 'note', :height => 120, :class => 'card-img-top' %>
+      <% end %>
+      Area Name: <%= link_to area.name, area %>
+      Space: <%= area.space.name %>
+      Description: <%= area.description %>
+      <%= area.items.length %> items
+    </div>
+  <% end %>
+
+</div>

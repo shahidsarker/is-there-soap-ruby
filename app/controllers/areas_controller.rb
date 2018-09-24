@@ -1,5 +1,5 @@
 class AreasController < ApplicationController
-  before_action :set_areas, only: [:show, :edit, :update, :destroy]
+  before_action :set_area, only: [:show, :edit, :update, :destroy]
 
   def index
     @areas = Area.all
@@ -9,40 +9,40 @@ class AreasController < ApplicationController
   end
 
   def new
-    @areas = Area.new
+    @area = Area.new
   end
 
   def edit
   end
 
   def create
-    @areas = Area.new(areas_params)
+    @area = Area.new(area_params)
 
     respond_to do |f|
-      if @areas.save
-        f.html { redirect_to @areas, notice: 'Area created.' }
-        f.json { render :show, status: :created, location: @areas }
+      if @area.save
+        f.html { redirect_to @area, notice: 'Area created.' }
+        f.json { render :show, status: :created, location: @area }
       else
         f.html { render :new }
-        f.json { render json: @areas.errors, status: :unprocessable_entity }
+        f.json { render json: @area.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
     respond_to do |format|
-      if @areas.update(areas_params)
-        format.html { redirect_to @areas, notice: 'Area updated.' }
-        format.json { render :show, status: :ok, location: @areas }
+      if @area.update(area_params)
+        format.html { redirect_to @area, notice: 'Area updated.' }
+        format.json { render :show, status: :ok, location: @area }
       else
         format.html { render :edit }
-        format.json { render json: @areas.errors, status: :unprocessable_entity }
+        format.json { render json: @area.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @areas.destroy
+    @area.destroy
     respond_to do |format|
       format.html { redirect_to areas_url, notice: 'Area destroyed.' }
       format.json { head :no_content }
@@ -51,13 +51,13 @@ class AreasController < ApplicationController
 
   private
 
-  def set_areas
-    @areas = Area.find(params[:id])
+  def set_area
+    @area = Area.find(params[:id])
   end
 
-  def areas_params
+  def area_params
     # add permitted params
-    params.require(:areas).permit()
+    params.require(:area).permit(:name, :description,:space_id, :image)
   end
 
 end

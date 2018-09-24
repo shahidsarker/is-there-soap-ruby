@@ -1,0 +1,22 @@
+<!--card wih space information-->
+<div class="card" style="width: 18rem;">
+
+  <% if @area_item.area.photo.attached? %>
+    <%= image_tag(@area_item.area.image, class: 'card-img-top') %>
+  <% else %>
+    <%= octicon "location",:height => 200,  :class => "card-img-top" %>
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= @area_item.name %></h5>
+    <p class="card-text"><%= @area.description %></p>
+    <a href="#" class="btn btn-primary">Add Area</a>
+  </div>
+</div>
+<!--links to areas -->
+<% @area_items.each do |item| %>
+  <div class="card">
+    Item: <%= item.name %>
+  </div>
+<% end %>
+
+<!--<p>This area is used by <%#= @area.space.users.count %>.</p>-->
