@@ -1,5 +1,5 @@
 class AreaItemsController < ApplicationController
-  before_action :set_area_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_area_item, only: [:show, :edit, :update, :destroy, :full]
 
   def index
     @area_items = AreaItem.all
@@ -9,50 +9,68 @@ class AreaItemsController < ApplicationController
   end
 
   def new
-    @area_items = AreaItem.new
+    @area_item = AreaItem.new
   end
 
   def edit
   end
 
   def create
-    @area_items =AreaItem.new(area_items_params)
+    @area_item =AreaItem.new(area_items_params)
 
     respond_to do |format|
-      if @area_items.save
-        format.html {redirect_to @area_items, notice: 'Item added to area.'}
-        format.json { render :show, status: :created, location: @area_items}
+      if @area_item.save
+        format.html {redirect_to @area_item, notice: 'Item added to area.'}
+        format.json { render :show, status: :created, location: @area_item}
       else
         format.html { render :new}
-        format.json {render json: @area_items.errors, status: :unprocessable_entity}
+        format.json {render json: @area_item.errors, status: :unprocessable_entity}
       end
     end
   end
 
   def update
     respond_to do |format|
-      if @area_items.update(area_items_params)
-        format.html {redirect_to @area_items, notice: 'Item added to area.'}
-        format.json {render :show, status: :ok, location: @area_items}
+      if @area_item.update(area_items_params)
+        format.html {redirect_to @area_item, notice: 'Item added to area.'}
+        format.json {render :show, status: :ok, location: @area_item}
       end
     end
   end
 
   def destroy
-    @area_items.destroy
+    @area_item.destroy
     respond_to do |format|
       format.html {redirect_to area_items_url, notice: 'Item removed from area.'}
       format.json {head :no_content}
     end
   end
 
-  private
-
-  def set_area_items
-    @area = Area.find(params[:id])
+  def full
+    @area_item = AreaItem.find(params[:id])
+    @area_item.update(status: 1)
+    redirect_back(fallback_location: root_path)
   end
 
-  def area_items_params
-    params.require(:area_items).permit(:area_id, :item_id, :status)
+  def half
+    @area_item = AreaItem.find(params[:id])
+    @area_item.update(status: 0.5)
+    redirect_back(fallback_location: root_path)
+  end
+
+  def empty
+    @area_item = AreaItem.find(params[:id])
+    @area_item.update(status: 0)
+    redirect_back(fallback_location: root_path)
+  end
+
+  private
+
+  def set_area_item
+    @area_item = AreaItem.find(params[:id])
+  end
+
+  def area_item_params
+    params.require(:area_item).permit(:area_id, :item_id, :status)
   end
 end

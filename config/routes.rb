@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   resources :categories
-  resources :area_items
+  resources :area_items do
+    member do
+      put "full", to: "area_items#full"
+      put 'half', to: 'area_items#half'
+      put 'empty', to: 'area_items#empty'
+    end
+  end
   resources :items
   resources :space_users
   devise_for :users
