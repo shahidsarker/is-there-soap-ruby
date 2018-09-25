@@ -1,13 +1,20 @@
+<h1>Spaces</h1>
+
 <div class="row">
 
 <% @spaces.each do |space| %>
-    <div class="col-8">
-Space Name: <%= link_to space.name, space %>
-  Location: <%= space.location %>
-  Description: <%= space.description %>
+    <div class="card col-md-6">
 
+      <% if space.image.attached? %>
+      <%= image_tag space.image, class: 'rounded float-left img-fluid' %>
+        <% end %>
 
-  <%= space.areas.length %> Areas
+      <div class="card-body">
+      <p>Space Name: <%= link_to space.name, space %></p>
+      <p>Location: <%= space.location %></p>
+      <p>Description: <%= space.description %></p>
+      <p><%= space.areas.length %> Areas</p>
+      </div>
     </div>
 <% end %>
 

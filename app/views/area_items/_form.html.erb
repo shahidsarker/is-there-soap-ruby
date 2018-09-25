@@ -1,0 +1,65 @@
+<%= form_with(model: area_item, local: true) do |form| %>
+  <% if area_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(area_item.errors.count, "error") %> prohibited this area_item from being saved:</h2>
+
+      <ul>
+        <% area_item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field form-group">
+    <%= form.label :item %>
+    <%= form.collection_select(:item_id,Item.all,:id,:name, {}, {:class => 'form-control' }) %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :area %>
+    <%= form.collection_select(:area_id,Space.all,:id,:name, {}, {:class => 'form-control' }) %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :status %>
+
+    <div class="form-check">
+      <%= form.radio_button(:status, 1.0, {:class=> 'form-check-input'}) %>
+      <%= form.label(:status, 'Full',{:class=>'form-check-label'}) %>
+<!--      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>-->
+<!--      <label class="form-check-label" for="exampleRadios1">-->
+<!--        Default radio-->
+<!--      </label>-->
+    </div>
+    <div class="form-check">
+      <%= form.radio_button(:status, 0.5, {:class=>'form-check-input'}) %>
+      <%= form.label(:status, "Half",{:class=>'form-check-label'}) %>
+<!--      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">-->
+<!--      <label class="form-check-label" for="exampleRadios2">-->
+<!--        Second default radio-->
+<!--      </label>-->
+    </div>
+    <div class="form-check">
+      <%= form.radio_button(:status, 0.0, {:class=>'form-check-input'}) %>
+      <%= form.label(:status, "Empty",{:class=>'form-check-label'}) %>
+<!--      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>-->
+<!--      <label class="form-check-label" for="exampleRadios3">-->
+<!--        Disabled radio-->
+<!--      </label>-->
+    </div>
+
+
+
+
+
+
+
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+

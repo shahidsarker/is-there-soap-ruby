@@ -25,7 +25,6 @@
 
   <div class="field form-group">
     <%= form.label :space %>
-    <%#= form.text_field :space, :class => 'form-control' %>
     <%= form.collection_select(:space_id,Space.all,:id,:name, {}, {:class => 'form-control' }) %>
   </div>
 
