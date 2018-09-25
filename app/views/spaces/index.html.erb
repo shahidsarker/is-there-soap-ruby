@@ -1,14 +1,43 @@
+<h1>Spaces</h1>
+
 <div class="row">
 
-<% @spaces.each do |space| %>
-    <div class="col-8">
-Space Name: <%= link_to space.name, space %>
-  Location: <%= space.location %>
-  Description: <%= space.description %>
+  <% @spaces.each do |space| %>
+    <div class=" col-md-6 col-lg-4">
+      <div class="card">
+
+        <% if space.image.attached? %>
+          <%= image_tag space.image, class: 'card-img-top mw-75' %>
+        <% else %>
+          <%= octicon "location", :height => 200, :class => "card-img-top p-2" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title">Space: <%= link_to space.name, space %></h5>
+          <h6 class="card-subtitle">Location: <%= space.location %></h6>
+          <p class="card-text"><%= space.description %></p>
+          <!--  space areas-->
+          <% if space.areas.length > 0 %>
+
+            <% if space.areas.length == 1 %>
+              1 Area
+            <% else %>
+              <%= space.areas.length %> Areas
+            <% end %>
+
+            <ul class="list-unstyled">
+              <% space.areas.each do |area| %>
+                <li><%= link_to area.name, area, class: '' %></li>
+              <% end %>
+            </ul>
+
+          <% else %>
+            No Areas
+          <% end %>
 
 
-  <%= space.areas.length %> Areas
+        </div>
+      </div>
     </div>
-<% end %>
+  <% end %>
 
 </div>
