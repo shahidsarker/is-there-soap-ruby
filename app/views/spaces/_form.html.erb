@@ -1,0 +1,41 @@
+<%= form_with(model: space, local: true) do |form| %>
+  <% if space.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(space.errors.count, "error") %> prohibited this space from being saved:</h2>
+
+      <ul>
+        <% space.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="field form-group">
+    <%= form.label :name, :class => 'form-la' %>
+    <%= form.text_field :name, :class => 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :description %>
+    <%= form.text_field :description, :class => 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :location %>
+    <%= form.text_field :location, :class => 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :image %>
+    <%= form.file_field :image, :class => '' %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+

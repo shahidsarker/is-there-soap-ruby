@@ -1,0 +1,42 @@
+<%= form_with(model: area, local: true) do |form| %>
+  <% if area.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(area.errors.count, "error") %> prohibited this area from being saved:</h2>
+
+      <ul>
+        <% area.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="field form-group">
+    <%= form.label :name, :class => 'form-la' %>
+    <%= form.text_field :name, :class => 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :description %>
+    <%= form.text_field :description, :class => 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :space %>
+    <%#= form.text_field :space, :class => 'form-control' %>
+    <%= form.collection_select(:space_id,Space.all,:id,:name, {}, {:class => 'form-control' }) %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :image %>
+    <%= form.file_field :image, :class => '' %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit 'Submit', :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+

@@ -1,7 +1,14 @@
+<div class="row">
+
 <% @spaces.each do |space| %>
-Space Name: <%= space.name %>
+    <div class="col-8">
+Space Name: <%= link_to space.name, space %>
   Location: <%= space.location %>
   Description: <%= space.description %>
 
+
   <%= space.areas.length %> Areas
+    </div>
 <% end %>
+
+</div>
