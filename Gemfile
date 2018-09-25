@@ -71,3 +71,5 @@ gem 'faker'
 
 gem 'octicons'
 gem 'octicons_helper'
+
+gem 'google-cloud-storage'
