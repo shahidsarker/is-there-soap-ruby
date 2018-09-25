@@ -1,0 +1,8 @@
+var areaitembar = $('#areaitem<%= @area_item.id %>progressbar')
+var emptybutton = $('#areaitem<%= @area_item.id %>empty')
+
+
+$(emptybutton).unbind('click').click(function(e){
+    e.preventDefault();
+    $(areaitembar).css('width', '0%');
+});

@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   resources :categories
   resources :area_items do
     member do
-      put "full", to: "area_items#full"
+      get 'full', to: 'area_items#full'
+      put 'full', to: 'area_items#full'
       put 'half', to: 'area_items#half'
       put 'empty', to: 'area_items#empty'
     end

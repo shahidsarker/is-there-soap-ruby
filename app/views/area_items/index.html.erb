@@ -2,24 +2,24 @@
 
   <% @area_items.order("id DESC").each do |areaitem| %>
     <div class="col-6">
-    <div class="card">
-      <h5 class="card-header"><%= link_to areaitem.item.name, areaitem.item %></h5>
-      <div class="card-body">
-        <h5 class="card-title"><%= link_to areaitem.area.space.name, areaitem.area.space %>: <%= link_to areaitem.area.name, areaitem.area %></h5>
-        <p class="card-text"><%= areaitem.item.description %></p>
-        <div  class="card-text">
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" id="areaitem<%= areaitem.id %>progressbar" style="width: <%= areaitem.status * 100 %>%" aria-valuenow="<%= areaitem.status * 100 %>" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        </div>
-        <div class="d-flex justify-content-around">
-        <%= link_to 'Empty', empty_area_item_path(areaitem), method: :put, :class => 'btn btn-danger empty-btn',:id => "areaitem#{areaitem.id}empty", :remote => true %>
-        <%= link_to 'Half', half_area_item_path(areaitem), method: :put, :class => 'btn btn-warning half-btn',:id => "areaitem#{areaitem.id}half", :remote => true  %>
-        <%= link_to 'Full', full_area_item_path(areaitem), method: :put, :class => 'btn btn-success full-btn',:id => "areaitem#{areaitem.id}full", :remote => true  %>
+      <div class="card">
+        <h5 class="card-header"><%= link_to areaitem.item.name, areaitem.item %></h5>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to areaitem.area.space.name, areaitem.area.space %>
+            : <%= link_to areaitem.area.name, areaitem.area %></h5>
+          <p class="card-text"><%= areaitem.item.description %></p>
+          <div class="card-text">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" id="areaitem<%= areaitem.id %>progressbar" style="width: <%= areaitem.status * 100 %>%" aria-valuenow="<%= areaitem.status * 100 %>" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <%= link_to 'Empty', empty_area_item_path(:id => areaitem), method: :put, :class => 'btn btn-danger empty-btn', :id => "areaitem#{areaitem.id}empty", remote: true %>
+            <%= link_to 'Half', half_area_item_path(areaitem), method: :put, :class => 'btn btn-warning half-btn', :id => "areaitem#{areaitem.id}half", remote: true %>
+            <%= link_to 'Full', full_area_item_path(:id => areaitem), method: :put, :class => 'btn btn-success full-btn', :id => "areaitem#{areaitem.id}full", data:{id: areaitem.id}, remote:true%>
+          </div>
         </div>
       </div>
     </div>
-    </div>
   <% end %>
-
 </div>

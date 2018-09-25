@@ -16,7 +16,7 @@ class AreaItemsController < ApplicationController
   end
 
   def create
-    @area_item =AreaItem.new(area_items_params)
+    @area_item = AreaItem.new(area_item_params)
 
     respond_to do |format|
       if @area_item.save
@@ -31,7 +31,7 @@ class AreaItemsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @area_item.update(area_items_params)
+      if @area_item.update(area_item_params)
         format.html {redirect_to @area_item, notice: 'Item added to area.'}
         format.json {render :show, status: :ok, location: @area_item}
       end
@@ -49,19 +49,16 @@ class AreaItemsController < ApplicationController
   def full
     @area_item = AreaItem.find(params[:id])
     @area_item.update(status: 1)
-    redirect_back(fallback_location: root_path)
   end
 
   def half
     @area_item = AreaItem.find(params[:id])
     @area_item.update(status: 0.5)
-    redirect_back(fallback_location: root_path)
   end
 
   def empty
     @area_item = AreaItem.find(params[:id])
     @area_item.update(status: 0)
-    redirect_back(fallback_location: root_path)
   end
 
   private

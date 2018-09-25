@@ -1,4 +1,10 @@
-areaitembar = document.getElementById('areaitem<%= @areaitem.id %>progressbar')
-fullbutton = document.getElementById('areaitem<%= @areaitem.id %>full')
+$(document).ready(function(){
 
-fullbutton.onclick(areaitembar.style.width='100%')
+var areaitembar = $('#areaitem<%= @area_item.id %>progressbar')
+var fullbutton = $('#areaitem<%= @area_item.id %>full')
+
+
+$(fullbutton).unbind('click').click(function(){
+    $(areaitembar).css('width', '100%');
+});
+});
