@@ -1,23 +1,76 @@
-<!--card wih space information-->
-<div class="card" style="width: 18rem;">
+<div class="row">
 
-  <% if @space.image.attached? %>
-  <%= image_tag(@space.image, class: 'card-img-top') %>
-  <% else %>
-    <%= octicon "location",:height => 200,  :class => "card-img-top" %>
-  <% end %>
-  <div class="card-body">
-    <h5 class="card-title"><%= @space.name %></h5>
-    <p class="card-text"><%= @space.description %></p>
-    <a href="#" class="btn btn-primary">Add Area</a>
+
+  <!--card wih space information-->
+  <div class="col col-lg-6 col-sm-12">
+    <div class="card">
+
+      <% if @space.image.attached? %>
+        <%= image_tag(@space.image, class: 'card-img-top') %>
+      <% else %>
+        <%= octicon "location", :height => 200, :class => "card-img-top" %>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @space.name %></h5>
+        <h6 class="card-subtitle"><%= @space.location %></h6>
+        <p class="card-text"><%= @space.description %></p>
+        <p class="card-text">This space has <%= @space.users.count %> users.</p>
+      </div>
+    </div>
   </div>
+  <!--links to areas -->
+  <div class="col-lg-6 col col-sm-12">
+    <h5>Areas:</h5>
+    <% @space.areas.each do |area| %>
+      <div class="mb-3">
+        <div>
+
+          <% area.area_items.each do |area_item| %>
+            <script>
+                $(document).ready(function () {
+                    var area_itembar = $('#area_item<%= area_item.id %>progressbar')
+                    var emptybutton = $('#area_item<%= area_item.id %>empty')
+                    var halfbutton = $('#area_item<%= area_item.id %>half')
+                    var fullbutton = $('#area_item<%= area_item.id %>full')
+
+                    $(emptybutton).click(function (e) {
+                        $(area_itembar).css('width', '0%');
+                    });
+                    $(fullbutton).click(function () {
+                        $(area_itembar).css('width', '100%');
+                    });
+                    $(halfbutton).click(function (e) {
+                        $(area_itembar).css('width', '50%');
+                    });
+                });
+            </script>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><%= link_to area_item.item.name, area_item.item %></h5>
+                  <h6 class="card-subtitle"><%= link_to area_item.area.name, area_item.area %></h6>
+                  <!--          <h5 class="card-title"><%#= link_to area_item.area.space.name, area_item.area.space %>-->
+                  <!--            : <%#= link_to area_item.area.name, area_item.area %></h5>-->
+                  <!--          <p class="card-text">~<%#= area_item.item.quantity * area_item.status %></p>-->
+                  <div class="card-text">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" id="area_item<%= area_item.id %>progressbar" style="width: <%= area_item.status * 100 %>%" aria-valuenow="<%= area_item.status * 100 %>" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mt-2">
+                    <%= link_to 'Empty', empty_area_item_path(:id => area_item), method: :put, :class => 'btn btn-danger empty-btn', :id => "area_item#{area_item.id}empty", remote: true %>
+                    <%= link_to 'Half', half_area_item_path(area_item), method: :put, :class => 'btn btn-warning half-btn', :id => "area_item#{area_item.id}half", remote: true %>
+                    <%= link_to 'Full', full_area_item_path(:id => area_item), method: :put, :class => 'btn btn-success full-btn', :id => "area_item#{area_item.id}full", data: {id: area_item.id}, remote: true %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+
+      </div>
+    <% end %>
+  </div>
+
 </div>
-<!--links to areas -->
-<% @space.areas.each do |area| %>
-  <div class="card">
-  Area: <%= area.name %>
-  Items: <%= area.items.count %>
-  </div>
-<% end %>
-
-<p>This space has <%= @space.users.count %> users.</p>
