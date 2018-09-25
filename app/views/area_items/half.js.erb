@@ -1,8 +1,0 @@
-var areaitembar = $('#areaitem<%= @area_item.id %>progressbar')
-var halfbutton = $('#areaitem<%= @area_item.id %>half')
-
-
-$(halfbutton).unbind('click').click(function(e){
-    e.preventDefault();
-    $(areaitembar).css('width', '50%');
-});
