@@ -16,6 +16,10 @@
     <p class="alert"><%= alert %></p>
 
     <%#= render 'devise/shared/links' %>
+    <ul class="hmenu">
+      <%= render 'devise/menu/registration_items' %>
+      <%= render 'devise/menu/login_items' %>
+    </ul>
     <%= yield %>
   </div>
   </body>
