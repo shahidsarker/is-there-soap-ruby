@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_items, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.all
@@ -9,40 +9,40 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @items = Item.new
+    @item = Item.new
   end
 
   def edit
   end
 
   def create
-    @items = Item.new(items_params)
+    @item = Item.new(item_params)
 
     respond_to do |f|
-      if @items.save
-        f.html { redirect_to @items, notice: 'Item created.' }
-        f.json { render :show, status: :created, location: @items }
+      if @item.save
+        f.html { redirect_to @item, notice: 'Item created.' }
+        f.json { render :show, status: :created, location: @item }
       else
         f.html { render :new }
-        f.json { render json: @items.errors, status: :unprocessable_entity }
+        f.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
     respond_to do |format|
-      if @items.update(items_params)
-        format.html { redirect_to @items, notice: 'Item updated.' }
-        format.json { render :show, status: :ok, location: @items }
+      if @item.update(item_params)
+        format.html { redirect_to @item, notice: 'Item updated.' }
+        format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }
-        format.json { render json: @items.errors, status: :unprocessable_entity }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @items.destroy
+    @item.destroy
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item destroyed.' }
       format.json { head :no_content }
@@ -51,12 +51,12 @@ class ItemsController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_items
-    @items = Item.find(params[:id])
+  def set_item
+    @item = Item.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def items_params
-    params.require(:items).permit()
+  def item_params
+    params.require(:item).permit(:name,:description,:quantity,:unit)
   end
 end
