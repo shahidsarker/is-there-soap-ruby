@@ -1,3 +1,5 @@
+<% if user_signed_in? %>
+
 <div class="row">
   <div class="col justify-content-between">
     <span class="h1">Spaces</span>
@@ -46,3 +48,11 @@
   <% end %>
 
 </div>
+
+
+<% else %>
+<div class="jumbotron" style="background-color: #B4D6D3">
+  <h1 class="display-4">Is There Soap?</h1>
+  <p class="lead">A simple way of keeping track of supplies across your home or office!</p>
+</div>
+<% end %>
