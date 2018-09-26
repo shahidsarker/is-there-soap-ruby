@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
     <%= link_to('Edit registration', edit_user_registration_path, class: 'nav-item nav-link') %>
 <% else %>
-    <%= link_to('Register', new_user_registration_path, class: 'nav-item nav-link')  %>
+    <%= link_to('Register', new_user_registration_path, class: 'nav-item btn btn-primary')  %>
 <% end %>
