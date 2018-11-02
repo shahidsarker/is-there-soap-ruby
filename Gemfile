@@ -73,3 +73,5 @@ gem 'octicons'
 gem 'octicons_helper'
 
 gem 'google-cloud-storage'
+
+gem "loofah", ">= 2.2.3"
